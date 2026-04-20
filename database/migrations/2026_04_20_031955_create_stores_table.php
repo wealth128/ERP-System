@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('store_name');
             $table->string('location_address');
             $table->foreignId('manager_id')
-                  ->constrained(table: 'employee', column: 'emp_id');
+                  ->constraint(table: 'employee', column: 'emp_id');
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();

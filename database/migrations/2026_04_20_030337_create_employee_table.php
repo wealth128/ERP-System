@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('emp_email')->unique();
             $table->integer('age');
             $table->foreignId('store_id')
-                  ->nullable() 
-                  ->constrained(table: 'stores', column: 'store_id');
+                  ->nullable()
+                  ->constraint(table: 'stores', column: 'store_id');
             $table->date('date_hired');
 
             $table->timestamps();
