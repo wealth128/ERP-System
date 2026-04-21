@@ -64,7 +64,7 @@ class EmployeeController extends Controller
             'emp_email'
         ]));
 
-        return response();
+        //return response();
     }
 
     /**
@@ -74,4 +74,6 @@ class EmployeeController extends Controller
     {
         //
     }
+
+
 }

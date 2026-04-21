@@ -19,7 +19,7 @@ class employee extends Model
         ];
 
     public function store() {
-        return $this->belongsTo(store::class, 'store_id', 'store_id');
+        return $this->belongsTo(store::class);
     }
 }
 
