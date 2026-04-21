@@ -22,10 +22,7 @@ class employeeSeeder extends Seeder
                 'date_hired' => '2025-05-10',
                 'created_at' => now(),
                 'updated_at' => now()
-                ]
-        ]);
-
-        \DB::table('employee')->insert([
+            ],
             [
                 'first_name' => 'Aslan', 
                 'last_name' => 'Great', 
@@ -35,8 +32,8 @@ class employeeSeeder extends Seeder
                 'date_hired' => '2025-10-20',
                 'created_at' => now(),
                 'updated_at' => now()
-                ]
+            ]
         ]);
-
+        
     }
 }

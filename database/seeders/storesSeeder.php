@@ -16,11 +16,21 @@ class storesSeeder extends Seeder
             [
                 'store_code' => 'S101', 
                 'store_name' => 'CitiMatina', 
-                'location_address' => 'Quimpo Blvd, Ecolan, Davao City', 
+                'location_address' => 'Quimpo Blvd, Ecoland, Davao City', 
                 'manager_id' => 2, 
                 'is_active' => true, 
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'store_code' => 'S102',
+                'store_name' => 'CitiTacurong',
+                'location_address' => 'Tacurong City, Sultan Kudarat',
+                'manager_id' => 2,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+
             ]
         ]);
     }
