@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class storesSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class storesSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('stores')->insert([
+        DB::table('stores')->insert([
             [
                 'store_code' => 'S101', 
                 'store_name' => 'CitiMatina', 
@@ -30,7 +31,6 @@ class storesSeeder extends Seeder
                 'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now()
-
             ]
         ]);
     }

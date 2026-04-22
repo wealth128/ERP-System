@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class employeeSeeder extends Seeder
 {
@@ -12,7 +14,7 @@ class employeeSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('employee')->insert([
+        DB::table('employee')->insert([
             [
                 'first_name' => 'BabyBisbs', 
                 'last_name' => 'Paldo!', 
