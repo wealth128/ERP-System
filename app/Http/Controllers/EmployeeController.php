@@ -7,12 +7,31 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+       
+    public function store(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'emp_email'  => 'required|email|unique:employee,emp_email',
+            'age'        => 'required|numeric|min:18',
+            'store_id'   => 'required|exists:store,store_id',
+            'date_hired' => 'required|date',
+        ]);
+
+        
+        Employee::create($validatedData);
+
+        return redirect()->route('employee.index')->with('success', 'Added!');
+ 
+    }
+
     public function index()
     {
         //
+        $employee = Employee::all();
+        return view('employee.index', compact('employee'));
     }
 
     /**
@@ -23,20 +42,7 @@ class EmployeeController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-        Employee::create($request -> all());
-
-        //return response()
-    }
-
-    /**
-     * Display the specified resource.
-     */
+ 
     public function show(Employee $employee)
     {
         //
@@ -49,6 +55,10 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
+        $stores = Store::all();
+
+        return view('employee.edit', compact('employee', 'stores'));
+
     }
 
     /**
@@ -57,14 +67,15 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
+         $validatedData = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name'  => 'required|string|max:255',
+        'emp_email'  => 'required|email|unique:employee,emp_email,' . $employee->emp_id . ',emp_id'
+    ]);
 
-        $employee ->update($request ->only([
-            'first_name',
-            'last_name',
-            'emp_email'
-        ]));
+        $employee ->update($validatedData);
 
-        //return response();
+        return redirect()->route('employee.index')->with('success', 'Employee updated!');
     }
 
     /**
@@ -73,6 +84,8 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         //
+        $employee->delete();
+        return redirect()->route('employee.index')->with('success', 'Employee deleted!');
     }
 
 

@@ -12,6 +12,8 @@ class StoreController extends Controller
     public function index()
     {
         //
+        $stores = Store::all();
+        return view('stores.index', compact('stores'));
     }
 
     /**
@@ -28,7 +30,16 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
-        Store::create($request -> all());
+        $validatedData = $request->validate([
+            'store_code' => 'required|alphanumeric|max:255',
+            'store_name' => 'required|string|max:255',
+            'location_address' => 'required|string|max:255',
+            'manager_id' => 'required|exists:employee,emp_id',
+            'is_active' => 'required|bool'
+        ]);
+        Store::create($validatedData);
+        return redirect()->route('stores.index')->with('success', 'Added');
+     
     }
 
     /**
@@ -42,28 +53,38 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Store $store)
     {
         //
+        $employee = Employee::all();
+        return view('stores.edit', compact('employee', 'stores'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Store $stores)
     {
         //
-        $store ->update($request ->only([
-            'store_name',
-            'location_address'
-        ]));
+        $validatedData = $request->validate([
+        'store_code' => 'required|alphanumeric|max:255',
+        'store_name' => 'required|string|max:255',
+        'location_address' => 'required|string|max:255'
+    ]);
+
+        $stores ->update($validatedData);
+        return redirect()->route('stores.index')->with('success', 'Stores Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Store $stores)
     {
         //
+        $stores->delete();
+        return redirect()->route('stores.index')->with('success', 'Store deleted!');
+
     }
 }
